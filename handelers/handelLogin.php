@@ -49,7 +49,9 @@ if (!empty($errors)) {
             header('Location:../login.php');
         }
     } else {
-        echo "User not found";
+        $errors[] = "Incorrect password";
+        $_SESSION['log_errors'] = $errors;
+        header('Location:../login.php');
     }
 }
 
