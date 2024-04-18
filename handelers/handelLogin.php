@@ -49,7 +49,7 @@ if (!empty($errors)) {
             header('Location:../login.php');
         }
     } else {
-        $errors[] = "Incorrect password";
+        $errors[] = "User not fount";
         $_SESSION['log_errors'] = $errors;
         header('Location:../login.php');
     }
