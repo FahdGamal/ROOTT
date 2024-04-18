@@ -1,9 +1,11 @@
 <?php
+
 // Include database connection file
-include_once '../include/config.php.php';
+require_once '../include/config.php';
 
 // Get form data
-$name = $_POST['name'];
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -11,10 +13,12 @@ $password = $_POST['password'];
 $errors = array();
 
 // Validate name
-if (empty($name)) {
-    $errors[] = "Name is required";
+if (empty($firstname)) {
+    $errors[] = "First Name is required";
 }
-
+if (empty($lastname)) {
+    $errors[] = "Last Name is required";
+}
 // Validate email
 if (empty($email)) {
     $errors[] = "Email is required";
@@ -31,19 +35,20 @@ if (empty($password)) {
 
 // If there are validation errors, display them
 if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo $error . "<br>";
-    }
+
+    $_SESSION['errors'] = $errors;
+    header('Location:../register.php');
 } else {
     // If validation passes, proceed to insert data into the database
     // Hash the password before storing it
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     //  insert data into the database
-    $sql = "INSERT INTO user (name, email, password) VALUES ('$name', '$email', '$hashed_password')";
-
+    $sql = "INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `admin_id`) VALUES (NULL,'$firstname','$lastname', '$email', '$hashed_password',1)";
+    //var_dump($sql);
     if (mysqli_query($conn, $sql)) {
-        echo "Registration successful";
+        $_SESSION['success'] = "Registration successful";
+        header('Location:../index.php');
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -51,4 +56,3 @@ if (!empty($errors)) {
 
 // Close database connection
 mysqli_close($conn);
-?>

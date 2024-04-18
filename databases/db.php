@@ -37,7 +37,7 @@ $sql = "CREATE TABLE `course` (
 
 
 
- //create the "user" table
+//create the "user" table
 $sql = "CREATE TABLE `user` (
     `id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `first_name` VARCHAR(30) NOT NULL,
@@ -65,14 +65,14 @@ $sql = "CREATE TABLE `instructor` (
     `specialty` VARCHAR(50) NOT NULL,
     `admin_id` INT(6) UNSIGNED,
     `course_id` INT(6) UNSIGNED,
-    FOREIGN KEY (admin_id) REFERENCES `admin(id)`,
-    FOREIGN KEY (course_id) REFERENCES `course(id)`
+    FOREIGN KEY (admin_id) REFERENCES admin(id),
+    FOREIGN KEY (course_id) REFERENCES course(id)
 )";
 
 
 
 
 
-mysqli_query($config, $sql , $query);
+mysqli_query($config, $sql, $query);
 
 mysqli_close($config);
