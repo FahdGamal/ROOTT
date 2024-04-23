@@ -1,7 +1,18 @@
 <?php
 
+session_start();
+// if(session_status() == PHP_SESSION_NONE) 
 include_once './include/header.php';
 include_once './include/nav.php';
+
+
+if (isset ($_SESSION['user_id'])){
+    header("Location: bootstrap.php");
+    exit();
+}else {
+    header("Location: login.php");
+    exit();
+}
 
 ?>
 

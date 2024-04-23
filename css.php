@@ -1,7 +1,17 @@
 <?php
+session_start();
+
 
 include_once './include/header.php';
 include_once './include/nav.php';
+
+if (isset ($_SESSION['user_id'])){
+    header("Location: ./css.php");
+    exit();
+}else {
+    header("Location:./login.php");
+    exit();
+}
 
 ?>
 

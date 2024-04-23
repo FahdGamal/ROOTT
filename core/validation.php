@@ -38,17 +38,17 @@ function emailVali($input)
 
 
 
-
+/// 
 // define variables and set to empty values
 $name = $email = $gender = $comment = $website = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = test_input($_POST["name"]);
+    $firstname = test_input($_POST["firstname"]);
+    $lastname = test_input($_POST["lastname"]);
     $email = test_input($_POST["email"]);
-    $website = test_input($_POST["website"]);
-    $comment = test_input($_POST["comment"]);
-    $gender = test_input($_POST["gender"]);
+    $email = test_input($_POST["password"]);
 }
+
 
 function test_input($data)
 {

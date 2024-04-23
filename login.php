@@ -1,7 +1,7 @@
 <?php
-require_once 'include/config.php';
-require_once 'include/header.php';
-require_once 'include/nav.php';
+    require_once 'include/config.php';
+    require_once 'include/header.php';
+    require_once 'include/nav.php';
 ?>
 
 
@@ -17,7 +17,7 @@ require_once 'include/nav.php';
         <?php
             endforeach;
             unset($_SESSION['log_errors']);
-        endif;
+            endif;
         ?>
 
         <form action="handelers/handellogin.php" method="POST">
