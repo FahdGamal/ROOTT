@@ -12,19 +12,19 @@ $errors = array();
 
 // Validate email
 if (empty($email)) {
-    $errors[] = "Email is required";
+    $errors['email'] = "Email is required";
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Invalid email format";
+    $errors['email'] = "Invalid email format";
 }
 
 // Validate password
 if (empty($password)) {
-    $errors[] = "Password is required";
+    $errors['password'] = "Password is required";
 }
 
 // If there are validation errors, display them
 if (!empty($errors)) {
-    $_SESSION['log_errors'] = $errors;
+    $_SESSION['errors'] = $errors;
     header('Location:../login.php');
 } else {
     // If validation passes, proceed to check credentials in the database
@@ -44,13 +44,13 @@ if (!empty($errors)) {
             header('Location:../index.php');
         } else {
 
-            $errors[] = "Incorrect password";
-            $_SESSION['log_errors'] = $errors;
+            $errors['password'] = "Incorrect password";
+            $_SESSION['errors'] = $errors;
             header('Location:../login.php');
         }
     } else {
-        $errors[] = "User not fount";
-        $_SESSION['log_errors'] = $errors;
+        $errors['user'] = "User not fount";
+        $_SESSION['errors'] = $errors;
         header('Location:../login.php');
     }
 }

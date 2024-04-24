@@ -1,7 +1,7 @@
 <?php
 
-include_once './include/header.php';
-include_once './include/nav.php';
+require_once './include/header.php';
+require_once './include/nav.php';
 
 
 ?>
@@ -31,13 +31,18 @@ include_once './include/nav.php';
             <div class="row g-5">
                 <div class="col-lg-6 " style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="img/about.jpg" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-100 h-100" src="img/about.jpg" alt=""
+                            style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <h1 class="mb-4">Welcome to Root</h1>
-                    <p class="mb-4">Learning programming through websites has become increasingly popular due to its accessibility and flexibility. These platforms offer a structured approach to mastering programming languages and concepts, catering to beginners and advanced learners alike.</p>
-                    <p>One of the key advantages of website-based learning is the wealth of resources available at your fingertips. From interactive tutorials and video lectures to coding challenges and projects, these platforms provide diverse learning materials to suit different learning styles.</p>
+                    <p class="mb-4">Learning programming through websites has become increasingly popular due to its
+                        accessibility and flexibility. These platforms offer a structured approach to mastering
+                        programming languages and concepts, catering to beginners and advanced learners alike.</p>
+                    <p>One of the key advantages of website-based learning is the wealth of resources available at your
+                        fingertips. From interactive tutorials and video lectures to coding challenges and projects,
+                        these platforms provide diverse learning materials to suit different learning styles.</p>
                 </div>
             </div>
         </div>
@@ -58,7 +63,8 @@ include_once './include/nav.php';
                     <div class="col-lg-12 col-md-12 ">
                         <a class="position-relative d-block overflow-hidden" href="">
                             <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                style="margin: 1px;">
                                 <h5 class="m-0">Front end</h5>
                             </div>
                         </a>
@@ -66,7 +72,8 @@ include_once './include/nav.php';
                     <div class="col-lg-6 col-md-12 ">
                         <a class="position-relative d-block overflow-hidden" href="">
                             <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                style="margin: 1px;">
                                 <h5 class="m-0">Back end</h5>
                             </div>
                         </a>
@@ -74,7 +81,8 @@ include_once './include/nav.php';
                     <div class="col-lg-6 col-md-12">
                         <a class="position-relative d-block overflow-hidden" href="">
                             <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
+                                style="margin: 1px;">
                                 <h5 class="m-0">introduction to computer science</h5>
                             </div>
                         </a>
@@ -84,7 +92,8 @@ include_once './include/nav.php';
 
             <div class="col-lg-5 col-md-6 " style="min-height: 350px;">
                 <a class="position-relative d-block h-100 overflow-hidden" href="">
-                    <img class="img-fluid position-absolute w-100 h-100" src="img/cat-4.jpg" alt="" style="object-fit: cover;">
+                    <img class="img-fluid position-absolute w-100 h-100" src="img/cat-4.jpg" alt=""
+                        style="object-fit: cover;">
                     <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin:  1px;">
                         <h5 class="m-0">Python</h5>
                     </div>
@@ -120,7 +129,8 @@ include_once './include/nav.php';
                             <div class="p-4">
                                 <ion-icon class="fa-4x text-primary mb-4" name="logo-css3"></ion-icon>
                                 <h5 class="mb-3">Css</h5>
-                                <p>It is a language used in designing web pages. Through it, you can change the colors of elements</p>
+                                <p>It is a language used in designing web pages. Through it, you can change the colors
+                                    of elements</p>
                             </div>
                         </div>
                     </a>
@@ -131,18 +141,20 @@ include_once './include/nav.php';
                             <div class="p-4">
                                 <i class="fa-brands fa-js fa-4x text-primary mb-4"></i>
                                 <h5 class="mb-3">Java Script</h5>
-                                <p>It is a programming language used by developers to build interactive web pages. From updating </p>
+                                <p>It is a programming language used by developers to build interactive web pages. From
+                                    updating </p>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 ">
-                    <a href="./bootstrap.php">
+                    <a href="bootstrap.php">
                         <div class="Courses-item text-center pt-3">
                             <div class="p-4">
                                 <i class="fa-brands fa-bootstrap fa-4x text-primary mb-4"></i>
                                 <h5 class="mb-3">Bootstrap</h5>
-                                <p>It is an integrated framework designed by the famous Twitter company and made it open source </p>
+                                <p>It is an integrated framework designed by the famous Twitter company and made it open
+                                    source </p>
                             </div>
                         </div>
                     </a>
@@ -153,7 +165,8 @@ include_once './include/nav.php';
                             <div class="p-4">
                                 <i class="fa-brands fa-php fa-4x text-primary mb-4"></i>
                                 <h5 class="mb-3">Php</h5>
-                                <p>Rasmus called Personal Home Page Tools a set of applications written using Perl. Personal </p>
+                                <p>Rasmus called Personal Home Page Tools a set of applications written using Perl.
+                                    Personal </p>
                             </div>
                         </div>
                     </a>
@@ -164,7 +177,8 @@ include_once './include/nav.php';
                             <div class="p-4">
                                 <i class="fa-solid fa-database fa-4x text-primary mb-4"></i>
                                 <h5 class="mb-3">Sql</h5>
-                                <p>A programming language widely used in network applications, software development, data</p>
+                                <p>A programming language widely used in network applications, software development,
+                                    data</p>
                             </div>
                         </div>
                     </a>
@@ -175,7 +189,8 @@ include_once './include/nav.php';
                             <div class="p-4">
                                 <i class="fa-brands fa-python fa-4x text-primary mb-4"></i>
                                 <h5 class="mb-3">Python</h5>
-                                <p>A programming language widely used in network applications, software development, data</p>
+                                <p>A programming language widely used in network applications, software development,
+                                    data</p>
                             </div>
                         </div>
                     </a>
@@ -186,7 +201,8 @@ include_once './include/nav.php';
                             <div class="p-4">
                                 <i class="fa-brands fa-java fa-4x text-primary mb-4"></i>
                                 <h5 class="mb-3">Java</h5>
-                                <p>It is a programming language used by developers to build interactive web pages. From updating </p>
+                                <p>It is a programming language used by developers to build interactive web pages. From
+                                    updating </p>
                             </div>
                         </div>
                     </a>

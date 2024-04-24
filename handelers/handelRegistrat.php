@@ -29,52 +29,52 @@ $errors = [];
 
 // Validate first name
 if (!requiredVali($firstname)) {
-    $errors[] = "First Name is required";
-    echo "<script>document.getElementById('firstname').innerHTML = 'First Name is required';</script>";
+    $errors['firstname'] = "First Name is required";
+    //echo "<script>document.getElementById('firstname').innerHTML = 'First Name is required';</script>";
 } elseif (!minVali($firstname, 3)) {
-    $errors[] = "First Name must be at least 3 characters long";
-    echo "<script>document.getElementById('firstname').innerHTML = 'First Name must be at least 3 characters long';</script>";
+    $errors['firstname'] = "First Name must be at least 3 characters long";
+    //echo "<script>document.getElementById('firstname').innerHTML = 'First Name must be at least 3 characters long';</script>";
 } elseif (!maxVali($firstname, 10)) {
-    $errors[] = "First Name must be less than 10 characters long";
-    echo "<script>document.getElementById('firstname').innerHTML = 'First Name must be less than 10 characters long';</script>";
+    $errors['firstname'] = "First Name must be less than 10 characters long";
+    //echo "<script>document.getElementById('firstname').innerHTML = 'First Name must be less than 10 characters long';</script>";
 }
 
 
 
 // Validate last name
 if (!requiredVali($lastname)) {
-    $errors[] = "Last Name is required";
-    echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name is required';</script>";
+    $errors['lastname'] = "Last Name is required";
+    //echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name is required';</script>";
 } elseif (!minVali($lastname, 3)) {
-    $errors[] = "Last Name must be at least 3 characters long";
-    echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name must be at least 3 characters long';</script>";
+    $errors['lastname'] = "Last Name must be at least 3 characters long";
+    //echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name must be at least 3 characters long';</script>";
 } elseif (!maxVali($lastname, 10)) {
-    $errors[] = "Last Name must be less than 10 characters long";
-    echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name must be less than 10 characters long';</script>";
+    $errors['lastname'] = "Last Name must be less than 10 characters long";
+    //echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name must be less than 10 characters long';</script>";
 }
 
 
 
 // Validate email
 if (!requiredVali($email)) {
-    $errors[] = "Email is required";
-    echo "<script>document.getElementById('email-error').innerHTML = 'Email is required';</script>";
+    $errors['email'] = "Email is required";
+    //echo "<script>document.getElementById('email-error').innerHTML = 'Email is required';</script>";
 } elseif (!emailVali($email)) {
-    $errors[] = "Please enter a valid email address";
-    echo "<script>document.getElementById('email-error').innerHTML = 'Please enter a valid email address';</script>";
+    $errors['email'] = "Please enter a valid email address";
+    //echo "<script>document.getElementById('email-error').innerHTML = 'Please enter a valid email address';</script>";
 }
 
 
 
 // Validate password
 if (!requiredVali($password)) {
-    $errors[] = "Password is required";
+    $errors['password'] = "Password is required";
     echo "<script>document.getElementById('password-error').innerHTML = 'Password is required';</script>";
 } elseif (!minVali($password, 6)) {
-    $errors[] = "Password must be at least 6 characters long";
+    $errors['password'] = "Password must be at least 6 characters long";
     echo "<script>document.getElementById('password-error').innerHTML = 'Password must be at least 6 characters long';</script>";
 } elseif (!maxVali($password, 20)) {
-    $errors[] = "Password must be less than 20 characters long";
+    $errors['password'] = "Password must be less than 20 characters long";
     echo "<script>document.getElementById('password-error').innerHTML = 'Password must be less than 20 characters long';</script>";
 }
 // Check if email already exists
@@ -120,4 +120,3 @@ mysqli_stmt_close($stmt);
 
 // Close database connection
 mysqli_close($conn);
-?>
