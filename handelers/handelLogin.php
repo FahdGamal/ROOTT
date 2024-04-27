@@ -49,18 +49,19 @@ if (!empty($errors)) {
             header('Location:../login.php');
         }
     } else {
+
         $sql_admin = "SELECT * FROM `admin` WHERE email = '$email'";
 
-        $result_admin = mysqli_query($conn, $sql);
-
+        $result_admin = mysqli_query($conn, $sql_admin);
+        //var_dump(mysqli_query($conn, $sql_admin));
         if ($result_admin && mysqli_num_rows($result_admin) > 0) {
-            $user = mysqli_fetch_assoc($result_admin);
+            $admin = mysqli_fetch_assoc($result_admin);
             // Verify password
-            if (password_verify($password, $user['password'])) {
+            if (password_verify($password, $admin['password'])) {
                 // Password is correct, start a new session
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                echo "Login successful. Welcome Admin, " . $user['username'];
+                $_SESSION['user_id'] = $admin['id'];
+                $_SESSION['username'] = $admin['username'];
+                echo "Login successful. Welcome Admin, " . $admin['username'];
                 header('Location:../admin/index.php');
             } else {
 
@@ -71,6 +72,7 @@ if (!empty($errors)) {
         }
         $errors['user'] = "User not fount bro";
         $_SESSION['errors'] = $errors;
+
         header('Location:../login.php');
     }
 }
