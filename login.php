@@ -14,7 +14,7 @@ require_once 'include/nav.php';
             <?php
             if (isset($_SESSION['errors']['user'])) :
             ?>
-            <span class="text-danger"><?php echo $_SESSION['errors']['user']; ?></span>
+                <span class="text-danger"><?php echo $_SESSION['errors']['user']; ?></span>
             <?php
                 unset($_SESSION['errors']['user']);
             endif;
@@ -23,17 +23,16 @@ require_once 'include/nav.php';
             <?php
             if (isset($_SESSION['errors']['email'])) :
             ?>
-            <span class="text-danger"><?php echo $_SESSION['errors']['email']; ?></span>
+                <span class="text-danger"><?php echo $_SESSION['errors']['email']; ?></span>
             <?php
                 unset($_SESSION['errors']['email']);
             endif;
             ?>
-            <input id="password" name="password" type="text" class="form-control my-3" placeholder="Enter your password"
-                minlength="6" maxlength="10">
+            <input id="password" name="password" type="text" class="form-control my-3" placeholder="Enter your password">
             <?php
             if (isset($_SESSION['errors']['password'])) :
             ?>
-            <span class="text-danger"><?php echo $_SESSION['errors']['password']; ?></span>
+                <span class="text-danger"><?php echo $_SESSION['errors']['password']; ?></span>
             <?php
                 unset($_SESSION['errors']['password']);
             endif;

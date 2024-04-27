@@ -11,12 +11,13 @@ require_once 'include/nav.php';
         <h1 class="text-primary">SignUp</h1>
 
         <form action="handelers/handelRegistrat.php" method="POST">
-            
-            <input id="username" name="username" type="text" class="form-control my-3 " placeholder="Enter Your UserName" minlength="3" maxlength="10">
+
+            <input id="username" name="username" type="text" class="form-control my-3 "
+                placeholder="Enter Your UserName">
             <?php
             if (isset($_SESSION['errors']['username'])) :
             ?>
-                <span class="text-danger"><?php echo $_SESSION['errors']['username']; ?></span>
+            <span class="text-danger"><?php echo $_SESSION['errors']['username']; ?></span>
             <?php
                 unset($_SESSION['errors']['username']);
             endif;
@@ -25,16 +26,17 @@ require_once 'include/nav.php';
             <?php
             if (isset($_SESSION['errors']['email'])) :
             ?>
-                <span class="text-danger"><?php echo $_SESSION['errors']['email']; ?></span>
+            <span class="text-danger"><?php echo $_SESSION['errors']['email']; ?></span>
             <?php
                 unset($_SESSION['errors']['email']);
             endif;
             ?>
-            <input id="password" name="password" type="password" class="form-control my-3" placeholder="Enter Your Password" minlength="6" maxlength="10">
+            <input id="password" name="password" type="password" class="form-control my-3"
+                placeholder="Enter Your Password">
             <?php
             if (isset($_SESSION['errors']['password'])) :
             ?>
-                <span class="text-danger"><?php echo $_SESSION['errors']['password']; ?></span>
+            <span class="text-danger"><?php echo $_SESSION['errors']['password']; ?></span>
             <?php
                 unset($_SESSION['errors']['password']);
             endif;

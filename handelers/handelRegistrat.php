@@ -11,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
+$username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -59,7 +58,7 @@ mysqli_stmt_fetch($check_email_stmt);
 mysqli_stmt_close($check_email_stmt);
 
 if ($email_count > 0) {
-    $errors[] = "Email already exists";
+    $errors['email'] = "Email already exists";
 }
 
 // If there are validation errors, display them
@@ -73,10 +72,10 @@ if (!empty($errors)) {
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert data into the database
-$sql = "INSERT INTO `user` (`id`, `username, `email`, `password`, `admin_id`) VALUES (NULL, ?, ?, ?, ?, 1)";
+$sql = "INSERT INTO `user` (`id`, `username`, `email`, `password`, `admin_id`) VALUES (NULL , ?, ?, ?, 1)";
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashed_password);
-
+mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashed_password);
+var_dump(mysqli_stmt_execute($stmt));
 
 if (mysqli_stmt_execute($stmt)) {
     $_SESSION['success'] = "Registration successful";

@@ -39,8 +39,8 @@ if (!empty($errors)) {
         if (password_verify($password, $user['password'])) {
             // Password is correct, start a new session
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
-            echo "Login successful. Welcome, " . $user['first_name'] . ' ' . $user['last_name'];
+            $_SESSION['user_name'] = $user['username'];
+            echo "Login successful. Welcome, " . $user['username'];
             header('Location:../index.php');
         } else {
 
@@ -49,7 +49,27 @@ if (!empty($errors)) {
             header('Location:../login.php');
         }
     } else {
-        $errors['user'] = "User not fount";
+        $sql_admin = "SELECT * FROM `admin` WHERE email = '$email'";
+
+        $result_admin = mysqli_query($conn, $sql);
+
+        if ($result_admin && mysqli_num_rows($result_admin) > 0) {
+            $user = mysqli_fetch_assoc($result_admin);
+            // Verify password
+            if (password_verify($password, $user['password'])) {
+                // Password is correct, start a new session
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                echo "Login successful. Welcome Admin, " . $user['username'];
+                header('Location:../admin/index.php');
+            } else {
+
+                $errors['password'] = "Incorrect password";
+                $_SESSION['errors'] = $errors;
+                header('Location:../login.php');
+            }
+        }
+        $errors['user'] = "User not fount bro";
         $_SESSION['errors'] = $errors;
         header('Location:../login.php');
     }
