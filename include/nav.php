@@ -27,11 +27,14 @@
                 </div>
                 <?php
                     if(isset($_SESSION['user_id'])) {
+                        echo '<a href="profile.php" class="nav-item nav-link">PROFILE</a>';
+                    
+                    }
+                    if(isset($_SESSION['user_id'])) {
                         echo '<a href="logout.php" class="nav-item nav-link">LOGOUT</a>';
                         
-                    } else {
+                    }else {
                         echo '<a href="login.php" class="nav-item nav-link">LOGIN</a>';
-                        // echo '<a href="register.php" class="nav-item nav-link">REGISTRATION</a>';
                     }
 
                 ?>

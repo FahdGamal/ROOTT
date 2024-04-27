@@ -2,10 +2,10 @@
 // Include database connection file
 include_once '../include/config.php';
 
-// var_dump($_POST);
-// Get form data
+// Post form data
 $email = $_POST['email'];
 $password = $_POST['password'];
+
 
 // Validation
 $errors = array();

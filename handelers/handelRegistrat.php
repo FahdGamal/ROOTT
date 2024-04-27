@@ -1,9 +1,7 @@
 <?php
 
-// Include database connection file
+// Include database connection file and validate 
 require_once '../include/config.php';
-
-// Include validation file
 require_once '../core/validation.php';
 
 // Check if the request method is POST
@@ -13,55 +11,30 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-
-
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 
-
-
 $errors = [];
 
 
-
 // Validate first name
-if (!requiredVali($firstname)) {
-    $errors['firstname'] = "First Name is required";
-    //echo "<script>document.getElementById('firstname').innerHTML = 'First Name is required';</script>";
-} elseif (!minVali($firstname, 3)) {
-    $errors['firstname'] = "First Name must be at least 3 characters long";
-    //echo "<script>document.getElementById('firstname').innerHTML = 'First Name must be at least 3 characters long';</script>";
-} elseif (!maxVali($firstname, 10)) {
-    $errors['firstname'] = "First Name must be less than 10 characters long";
-    //echo "<script>document.getElementById('firstname').innerHTML = 'First Name must be less than 10 characters long';</script>";
+if (!requiredVali($username)) {
+    $errors['username'] = "User Name is required";
+} elseif (!minVali($username, 3)) {
+    $errors['username'] = "User Name must be at least 3 characters long";
+} elseif (!maxVali($username, 20)) {
+    $errors['username'] = "User Name must be less than 10 characters long";
 }
-
-
-
-// Validate last name
-if (!requiredVali($lastname)) {
-    $errors['lastname'] = "Last Name is required";
-    //echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name is required';</script>";
-} elseif (!minVali($lastname, 3)) {
-    $errors['lastname'] = "Last Name must be at least 3 characters long";
-    //echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name must be at least 3 characters long';</script>";
-} elseif (!maxVali($lastname, 10)) {
-    $errors['lastname'] = "Last Name must be less than 10 characters long";
-    //echo "<script>document.getElementById('lastname-error').innerHTML = 'Last Name must be less than 10 characters long';</script>";
-}
-
 
 
 // Validate email
 if (!requiredVali($email)) {
     $errors['email'] = "Email is required";
-    //echo "<script>document.getElementById('email-error').innerHTML = 'Email is required';</script>";
 } elseif (!emailVali($email)) {
     $errors['email'] = "Please enter a valid email address";
-    //echo "<script>document.getElementById('email-error').innerHTML = 'Please enter a valid email address';</script>";
 }
 
 
@@ -69,14 +42,13 @@ if (!requiredVali($email)) {
 // Validate password
 if (!requiredVali($password)) {
     $errors['password'] = "Password is required";
-    echo "<script>document.getElementById('password-error').innerHTML = 'Password is required';</script>";
 } elseif (!minVali($password, 6)) {
     $errors['password'] = "Password must be at least 6 characters long";
-    echo "<script>document.getElementById('password-error').innerHTML = 'Password must be at least 6 characters long';</script>";
 } elseif (!maxVali($password, 20)) {
     $errors['password'] = "Password must be less than 20 characters long";
-    echo "<script>document.getElementById('password-error').innerHTML = 'Password must be less than 20 characters long';</script>";
 }
+
+
 // Check if email already exists
 $check_email_sql = "SELECT COUNT(*) FROM `user` WHERE `email` = ?";
 $check_email_stmt = mysqli_prepare($conn, $check_email_sql);
@@ -88,7 +60,6 @@ mysqli_stmt_close($check_email_stmt);
 
 if ($email_count > 0) {
     $errors[] = "Email already exists";
-    echo "<script>displayError('email', 'Email already exists');</script>";
 }
 
 // If there are validation errors, display them
@@ -102,9 +73,9 @@ if (!empty($errors)) {
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert data into the database
-$sql = "INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `admin_id`) VALUES (NULL, ?, ?, ?, ?, 1)";
+$sql = "INSERT INTO `user` (`id`, `username, `email`, `password`, `admin_id`) VALUES (NULL, ?, ?, ?, ?, 1)";
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "ssss", $firstname, $lastname, $email, $hashed_password);
+mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashed_password);
 
 
 if (mysqli_stmt_execute($stmt)) {

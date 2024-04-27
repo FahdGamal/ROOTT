@@ -2,8 +2,12 @@
 
 include_once './include/header.php';
 include_once './include/nav.php';
-
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+} else {
 ?>
+
 
 
 
@@ -298,5 +302,6 @@ include_once './include/nav.php';
 <!-- courseJava End -->
 
 <?php
+}
 include_once './include/footer.php';
 ?>
