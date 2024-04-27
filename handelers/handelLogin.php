@@ -50,32 +50,42 @@ if (!empty($errors)) {
         }
     } else {
 
-        $sql_admin = "SELECT * FROM `admin` WHERE email = '$email'";
-
-        $result_admin = mysqli_query($conn, $sql_admin);
-        //var_dump(mysqli_query($conn, $sql_admin));
-        if ($result_admin && mysqli_num_rows($result_admin) > 0) {
-            $admin = mysqli_fetch_assoc($result_admin);
-            // Verify password
-            if (password_verify($password, $admin['password'])) {
-                // Password is correct, start a new session
-                $_SESSION['user_id'] = $admin['id'];
-                $_SESSION['username'] = $admin['username'];
-                echo "Login successful. Welcome Admin, " . $admin['username'];
-                header('Location:../admin/index.php');
-            } else {
-
-                $errors['password'] = "Incorrect password";
-                $_SESSION['errors'] = $errors;
-                header('Location:../login.php');
-            }
+    //    
+    
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    $sql_admin = "SELECT * FROM `admin` WHERE `email` = '$email'";
+    $result_admin = mysqli_query($conn, $sql_admin);
+    
+    if ($result_admin && mysqli_num_rows($result_admin) > 0) {
+        $admin = mysqli_fetch_assoc($result_admin);
+        
+        // التحقق من كلمة المرور
+        if (password_verify($password, $admin['password'])) {
+            // كلمة المرور صحيحة، بدء جلسة جديدة
+            $_SESSION['user_id'] = $admin['id'];
+            $_SESSION['username'] = $admin['username'];
+            echo "تسجيل الدخول ناجح. مرحبًا بك، " . $admin['username'];
+            header('Location: ../admin/index.php');
+            exit();
+        } else {
+            // كلمة المرور غير صحيحة
+            $_SESSION['errors']['password'] = "كلمة المرور غير صحيحة";
+            header('Location: ../login.php');
+            exit();
         }
-        $errors['user'] = "User not fount bro";
-        $_SESSION['errors'] = $errors;
-
-        header('Location:../login.php');
+    } else {
+        // البريد الإلكتروني غير موجود
+        $_SESSION['errors']['user'] = "المستخدم غير موجود";
+        header('Location: ../login.php');
+        exit();
     }
+    
+
+
 }
 
 // Close database connection
 mysqli_close($conn);
+}
