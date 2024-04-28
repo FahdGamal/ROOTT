@@ -3,6 +3,12 @@
 include_once './include/header.php';
 include_once './include/nav.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+} else {
+?>
+
 ?>
 
 <!-- courseHtml Start -->
@@ -242,37 +248,9 @@ include_once './include/nav.php';
 
 </section>
 <!-- courseHtml End -->
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5 justify-content-between">
-
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3">Quick Link</h4>
-                <a class="btn btn-link" href="#about">About Us</a>
-                <a class="btn btn-link" href="#tutorial">tutorial</a>
-                <a class="btn btn-link" href="#courses">courses</a>
-                <a class="btn btn-link" href="#Instructors">Instructors</a>
-                <a class="btn btn-link" href="./contact.html">contact Us</a>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3">Contact</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>122 Street, Cairo, Egypt</p>
-                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+010 23459111</p>
-                <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@root.com</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
 
 
-        </div>
-    </div>
-</div>
 <?php
+}
 include_once './include/footer.php';
 ?>

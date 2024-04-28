@@ -3,6 +3,10 @@
 require_once './include/header.php';
 require_once './include/nav.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+} else {
 ?>
 
 
@@ -278,5 +282,6 @@ require_once './include/nav.php';
 <!-- coursesql End -->
 
 <?php
+}
 require_once './include/footer.php';
 ?>

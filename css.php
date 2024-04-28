@@ -1,9 +1,16 @@
 <?php
+session_start();
+
 
 include_once './include/header.php';
 include_once './include/nav.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+} else {
 ?>
+
 
 
 <!-- courseCss Start -->
@@ -264,5 +271,6 @@ include_once './include/nav.php';
 <!-- courseCss End -->
 
 <?php
+}
 include_once './include/footer.php';
 ?>

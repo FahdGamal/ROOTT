@@ -2,29 +2,29 @@
 // Include database connection file
 include_once '../include/config.php';
 
-// var_dump($_POST);
-// Get form data
+// Post form data
 $email = $_POST['email'];
 $password = $_POST['password'];
+
 
 // Validation
 $errors = array();
 
 // Validate email
 if (empty($email)) {
-    $errors[] = "Email is required";
+    $errors['email'] = "Email is required";
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Invalid email format";
+    $errors['email'] = "Invalid email format";
 }
 
 // Validate password
 if (empty($password)) {
-    $errors[] = "Password is required";
+    $errors['password'] = "Password is required";
 }
 
 // If there are validation errors, display them
 if (!empty($errors)) {
-    $_SESSION['log_errors'] = $errors;
+    $_SESSION['errors'] = $errors;
     header('Location:../login.php');
 } else {
     // If validation passes, proceed to check credentials in the database
@@ -39,21 +39,53 @@ if (!empty($errors)) {
         if (password_verify($password, $user['password'])) {
             // Password is correct, start a new session
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
-            echo "Login successful. Welcome, " . $user['first_name'] . ' ' . $user['last_name'];
+            $_SESSION['user_name'] = $user['username'];
+            echo "Login successful. Welcome, " . $user['username'];
             header('Location:../index.php');
         } else {
 
-            $errors[] = "Incorrect password";
-            $_SESSION['log_errors'] = $errors;
+            $errors['password'] = "Incorrect password";
+            $_SESSION['errors'] = $errors;
             header('Location:../login.php');
         }
     } else {
-        $errors[] = "User not fount";
-        $_SESSION['log_errors'] = $errors;
-        header('Location:../login.php');
+
+    //    
+    
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    $sql_admin = "SELECT * FROM `admin` WHERE `email` = '$email'";
+    $result_admin = mysqli_query($conn, $sql_admin);
+    
+    if ($result_admin && mysqli_num_rows($result_admin) > 0) {
+        $admin = mysqli_fetch_assoc($result_admin);
+        
+        // التحقق من كلمة المرور
+        if (password_verify($password, $admin['password'])) {
+            // كلمة المرور صحيحة، بدء جلسة جديدة
+            $_SESSION['user_id'] = $admin['id'];
+            $_SESSION['username'] = $admin['username'];
+            echo "تسجيل الدخول ناجح. مرحبًا بك، " . $admin['username'];
+            header('Location: ../admin/index.php');
+            exit();
+        } else {
+            // كلمة المرور غير صحيحة
+            $_SESSION['errors']['password'] = "كلمة المرور غير صحيحة";
+            header('Location: ../login.php');
+            exit();
+        }
+    } else {
+        // البريد الإلكتروني غير موجود
+        $_SESSION['errors']['user'] = "المستخدم غير موجود";
+        header('Location: ../login.php');
+        exit();
     }
+    
+
+
 }
 
 // Close database connection
 mysqli_close($conn);
+}
