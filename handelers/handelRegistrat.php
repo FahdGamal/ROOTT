@@ -1,12 +1,8 @@
 <?php
-
-// Include database connection file and validate 
 require_once '../include/config.php';
 require_once '../core/validation.php';
 
-// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    // Redirect the user to an appropriate error page
     header('Location:../error.php');
     exit;
 }
@@ -15,28 +11,23 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-
 $errors = [];
 
-
-// Validate first name
+// Validate username
 if (!requiredVali($username)) {
-    $errors['username'] = "User Name is required";
+    $errors['username'] = "Username is required";
 } elseif (!minVali($username, 3)) {
-    $errors['username'] = "User Name must be at least 3 characters long";
+    $errors['username'] = "Username must be at least 3 characters long";
 } elseif (!maxVali($username, 20)) {
-    $errors['username'] = "User Name must be less than 10 characters long";
+    $errors['username'] = "Username must be less than 20 characters long";
 }
-
 
 // Validate email
 if (!requiredVali($email)) {
     $errors['email'] = "Email is required";
-} elseif (!emailVali($email)) {
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors['email'] = "Please enter a valid email address";
 }
-
-
 
 // Validate password
 if (!requiredVali($password)) {
@@ -46,7 +37,6 @@ if (!requiredVali($password)) {
 } elseif (!maxVali($password, 20)) {
     $errors['password'] = "Password must be less than 20 characters long";
 }
-
 
 // Check if email already exists
 $check_email_sql = "SELECT COUNT(*) FROM `user` WHERE `email` = ?";
@@ -61,32 +51,32 @@ if ($email_count > 0) {
     $errors['email'] = "Email already exists";
 }
 
-// If there are validation errors, display them
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
     header('Location:../register.php');
-    exit; // Make sure to exit after redirect
+    exit;
 }
 
-// Hash the password before storing it
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// Insert data into the database
-$sql = "INSERT INTO `user` (`id`, `username`, `email`, `password`, `admin_id`) VALUES (NULL , ?, ?, ?, 1)";
+$sql = "INSERT INTO `user` (`id`, `username`, `email`, `password`, `admin_id`) VALUES (NULL, ?, ?, ?, 1)";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashed_password);
-var_dump(mysqli_stmt_execute($stmt));
 
 if (mysqli_stmt_execute($stmt)) {
     $_SESSION['success'] = "Registration successful";
-    header('Location:../index.php');
-    exit; // Make sure to exit after redirect
+    header('Location:../login.php');
+    exit;
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    if (mysqli_errno($conn) == 1062) {
+        $_SESSION['error'] = "Email address already exists. Please use a different email address.";
+        header('Location:../registration.php');
+        exit;
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
 }
 
-// Close statement
 mysqli_stmt_close($stmt);
-
-// Close database connection
 mysqli_close($conn);
+?>
