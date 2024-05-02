@@ -20,25 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_id'])) {
     }
 }
 
-// Update user information in the database based on form data
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $new_username = $_POST['username'];
-    $new_email = $_POST['email'];
-    $user_id = $_POST['user_id'];
 
-    // Execute query to update user information
-    $sql_update = "UPDATE user SET username = '$new_username', email = '$new_email' WHERE id = '$user_id'";
-    $result_update = mysqli_query($conn, $sql_update);
-
-    // Check if the update was successful
-    if ($result_update) {
-        $message = "User information updated successfully.";
-        // Reload the page to display the update message after successful update
-        header("Refresh:0");
-    } else {
-        $message = "An error occurred while updating user information: " . mysqli_error($conn);
-    }
-}
 
 // Query to retrieve all users
 $sql = "SELECT `id`,`username`,`email` FROM user ";
@@ -67,8 +49,14 @@ if ($result && mysqli_num_rows($result) > 0) {
     <div class="container">
         <h1>Data of Users</h1>
         <!-- Display message -->
-        <?php if (!empty($message)): ?>
-            <p><?php echo $message; ?></p>
+        <?php if (isset($_SESSION['delete_message'])) : ?>
+            <div class="alert alert-danger"><?php echo $_SESSION['delete_message'];
+                                            unset($_SESSION['delete_message']);
+                                            ?></div>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['edit_message'])) : ?>
+            <div class="alert alert-info"><?php echo $_SESSION['edit_message'];
+                                            unset($_SESSION['edit_message']) ?></div>
         <?php endif; ?>
         <table class="table table-striped">
             <thead>
@@ -102,7 +90,8 @@ if ($result && mysqli_num_rows($result) > 0) {
             </tbody>
         </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
